@@ -222,29 +222,34 @@ void RunInference(Settings* s) {
   TfLiteIntArray* output_dims = interpreter->tensor(output)->dims;
   // assume output dims to be something like (1, 1, ... ,size)
   auto output_size = output_dims->data[output_dims->size - 1];
-  /*
+
+  
+  LOG(INFO) << "Output Vector: " << "\n";
   switch (interpreter->tensor(output)->type) {
     case kTfLiteFloat32:
-      get_top_n<float>(interpreter->typed_output_tensor<float>(0), output_size,
-                       s->number_of_results, threshold, &top_results,
-                       s->input_type);
+	for(int i=0;i<output_size;i++) {
+		LOG(INFO) << interpreter->typed_output_tensor<float>(0)[i] << " ";
+	}
+
+	LOG(INFO) << "\n";
       break;
-    case kTfLiteInt8:
-      get_top_n<int8_t>(interpreter->typed_output_tensor<int8_t>(0),
-                        output_size, s->number_of_results, threshold,
-                        &top_results, s->input_type);
+    case kTfLiteInt8: 
+	for(int i=0;i<output_size;i++) {
+		LOG(INFO) << interpreter->typed_output_tensor<int8_t>(0)[i] << " ";
+	LOG(INFO) << "\n";
+	}
       break;
     case kTfLiteUInt8:
-      get_top_n<uint8_t>(interpreter->typed_output_tensor<uint8_t>(0),
-                         output_size, s->number_of_results, threshold,
-                         &top_results, s->input_type);
+	for(int i=0;i<output_size;i++) {
+		LOG(INFO) << interpreter->typed_output_tensor<uint8_t>(0)[i] << " ";
+	}
+	LOG(INFO) << "\n";
       break;
     default:
       LOG(FATAL) << "cannot handle output type "
                  << interpreter->tensor(output)->type << " yet";
       exit(-1);
   }
-  */
 
 }
 
