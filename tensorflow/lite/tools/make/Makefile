@@ -41,10 +41,10 @@ INCLUDES := \
 -I$(MAKEFILE_DIR)/downloads/farmhash/src \
 -I$(MAKEFILE_DIR)/downloads/flatbuffers/include \
 -I$(MAKEFILE_DIR)/downloads/fp16/include \
--I$(OBJDIR)
+#-I$(OBJDIR)
 # This is at the end so any globally-installed frameworks like protobuf don't
 # override local versions in the source tree.
-INCLUDES += -I/usr/local/include
+#INCLUDES += -I/usr/local/include
 
 # These are the default libraries needed, but they can be added to or
 # overridden by the platform-specific settings in target makefiles.
@@ -52,7 +52,6 @@ LIBS := \
 -lstdc++ \
 -lpthread \
 -lm \
--lz \
 -ldl
 
 # There are no rules for compiling objects for the host system (since we don't
@@ -60,7 +59,7 @@ LIBS := \
 # these settings are for the target compiler.
 CFLAGS := -O3 -DNDEBUG -fPIC
 CXXFLAGS := $(CFLAGS) --std=c++11 $(EXTRA_CXXFLAGS)
-LDOPTS := -L/usr/local/lib
+#LDOPTS := -L/usr/local/lib
 ARFLAGS := -r
 TARGET_TOOLCHAIN_PREFIX :=
 CC_PREFIX :=
